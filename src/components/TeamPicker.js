@@ -9,8 +9,7 @@ class TeamPicker extends React.Component {
 
     goToTeam = (event) => {
         event.preventDefault();
-        console.log(this.teamNameRef.current.value);
-        //this.props.history.push(`/team/${this.teamNameRef.current.value}`)
+        this.props.history.push(`/team/${this.teamNameRef.current.value}`)
     }
 
     render(){
@@ -28,7 +27,7 @@ class TeamPicker extends React.Component {
                                 <InputGroup>
                                     <Input 
                                         type="text" 
-                                        ref={this.teamNameRef}
+                                        innerRef={this.teamNameRef}
                                         required 
                                         placeholder="Team Name"
                                     />

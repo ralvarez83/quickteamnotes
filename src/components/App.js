@@ -1,24 +1,22 @@
 import React from "react";
-import Header from "./Header";
-import Order from "./Order";
-import Inventory from "./Inventory";
-import sampleFishes from '../sample-fishes'
-import Fish from './Fish';
 import base from '../base';
-import Messages from "./Messages";
+import Notes from "./Notes";
 import { Container, Row, Col } from 'reactstrap';
 
 class App extends React.Component{
 
     state = {
-        messages: {}
+        notes: {}
     };
+
+    teamId = "";
 
     componentDidMount(){
         const {params} = this.props.match;
-        this.ref = base.syncState(`${params.teamId}/messages`, {
+        this.teamId = params.teamId;
+        this.ref = base.syncState(`${params.teamId}/notes`, {
             context:this,
-            state: 'messages'
+            state: 'notes'
         });
     }
 
@@ -26,11 +24,12 @@ class App extends React.Component{
         base.removeBinding(this.ref);
     }
 
-    addMessage = message => {
+    addNote = note => {
 
-        const messages = {...this.state.messages};
-        messages[`messages${Date.now()}`] = fish;
-        this.setState({messages: messages})
+        const notes = {...this.state.notes};
+        notes[`notes${Date.now()}`] = note;
+        console.log(notes);
+        this.setState({notes: notes})
     }
 
     render(){
@@ -38,9 +37,8 @@ class App extends React.Component{
             <Container>
                 <Row>
                     <Col>
-                        <Messages addMessage={this.addMessage} messages={this.state.messages} />
-                        {/* <Order fishes={this.state.messages} order={this.state.order}/> */}
-                        {/* <Inventory addMessage={this.addFish} loadSampleFishes={this.loadSampleFishes} /> */}
+                        <h1>{this.teamId}</h1>
+                        <Notes addNote={this.addNote} notes={this.state.notes} />
                     </Col>
                 </Row>
             </Container>
