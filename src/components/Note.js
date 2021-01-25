@@ -1,7 +1,12 @@
 import React from "react"
 import { Media } from 'reactstrap';
+import ReactHashtag from "react-hashtag";
 
 class Note extends React.Component{
+
+    handleHashtagClick = (val) => {
+        this.props.onHashtagClick(val);
+    }
 
     render(){
 
@@ -11,14 +16,15 @@ class Note extends React.Component{
             hour: 'numeric', minute: 'numeric', second: 'numeric',
             hour12: false
           };
+        const className = "note " + (note.important? "important": ""); 
         return (
-            <Media className="note">
+            <Media className={className}>
                 <Media left href="#">
                     <img src={note.gravatar} height="64" width="64" />
                 </Media>
                 <Media body>
                     <Media heading>
-                        {note.text}
+                        <ReactHashtag onHashtagClick={this.handleHashtagClick}>{note.text}</ReactHashtag>
                     </Media>
                     {note.author} - {new Intl.DateTimeFormat('default', options).format(new Date(note.date))}
                 </Media>

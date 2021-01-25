@@ -5,10 +5,19 @@
     padding: 10px;
 }
 
+.note.media.important {
+    background-color: rgb(250, 156, 156);
+}
+
 .note .media-body{
     margin-left: 10px;
 }
 
 .note h4{
     font-weight: normal;
+}
+
+.note.media span{
+    color:rgb(78, 136, 83);
+    cursor: pointer;
 }

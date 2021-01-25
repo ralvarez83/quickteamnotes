@@ -1,10 +1,11 @@
 import React from 'react';
 import Crypto from "crypto"
-import { Jumbotron, Container, Form, FormGroup, Input, Button, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Form, FormGroup, Input, Button, Row, Col, Label } from 'reactstrap';
 
 class AddNoteForm extends React.Component{
     textRef = React.createRef();
     authorRef = React.createRef();
+    importantRef = React.createRef();
 
     constructor(props){
         super(props);
@@ -20,13 +21,12 @@ class AddNoteForm extends React.Component{
     createNote = event => {
         event.preventDefault();
 
-
-
         const note = {
             author: this.authorRef.current.value,
             text: this.textRef.current.value,
             date: new Date().toISOString(),
-            gravatar: this.getGravatar(this.authorRef.current.value)
+            gravatar: this.getGravatar(this.authorRef.current.value),
+            important: this.importantRef.current.checked
         }
 
         this.props.addNote(note);
@@ -51,6 +51,14 @@ class AddNoteForm extends React.Component{
                         <Col md={6}>
                             <FormGroup>
                                 <Button type="submit" color="success">Add</Button>
+                            </FormGroup>
+                        </Col>
+                        <Col md={6}>
+                            <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="important" innerRef={this.importantRef} />
+                                        Important
+                                    </Label>
                             </FormGroup>
                         </Col>
                     </Row>

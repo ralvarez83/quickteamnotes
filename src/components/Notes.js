@@ -1,5 +1,4 @@
 import React from "react"
-import AddNoteForm from "./AddNoteForm"
 import Note from "./Note"
 import { Container, Row, Col } from 'reactstrap';
 
@@ -25,6 +24,7 @@ class Notes extends React.Component{
                                 key = {key}
                                 index = {key}
                                 noteData = {this.props.notes[key]}
+                                onHashtagClick={this.props.onHashtagClick}
                             />
                         )
                     }
@@ -35,11 +35,8 @@ class Notes extends React.Component{
 
     render(){
         return (
-            <Container flow>
-                <AddNoteForm addNote={this.props.addNote}/>
-                
+            <Container flow>                
                 {this.renderNotes()}
-
             </Container>
         );
     }
